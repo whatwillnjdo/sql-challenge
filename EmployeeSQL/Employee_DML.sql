@@ -63,5 +63,18 @@ select last_name, count(1) count_number_employees_by_last_name
 from employees 
 group by last_name order by count_number_employees_by_last_name desc;
 
+--A view for average salary and title
+
+create view average_salary_by_title as
+select et.title, round(avg(salary), 2) average_salary
+from employee_titles et 
+join employee_salaries es on et.employee_number = es.employee_number
+group by et.title;
 
 
+--A view for salary and employee
+
+create view salary_for_employee as
+select et.employee_number, es.salary
+from employees et 
+join employee_salaries es on et.employee_number = es.employee_number;
